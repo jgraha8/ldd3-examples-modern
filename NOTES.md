@@ -35,7 +35,7 @@ The inode is obtained from `filp->f_dentry->d_inode` in the `unlocked_ioctl` pro
 
 ### The task struct was updated to use the cred struct in commit:
 
-See: <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=b6dff3ec5e116e3af6f537d4caedcad6b9e5082a>
+See: [CRED: Separate task security context from task_struct](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=b6dff3ec5e116e3af6f537d4caedcad6b9e5082a)
 
 
 ### Getting the UID, EUID, etc.<a id="sec-1-2-2" name="sec-1-2-2"></a>
