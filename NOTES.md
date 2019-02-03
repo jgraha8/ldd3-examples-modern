@@ -2,6 +2,7 @@
 
 Notes for the port of the Linux Device Drivers 3rd Edition examples to the 4.x kernel series.
 
+
 ## `struct file_operations` -> `ioctl` removed
 
 When the Big Kernel Lock (BKL) was removed (fully removed in 2.6.39)
@@ -10,11 +11,13 @@ file operations struct.
 
 See: <https://kernelnewbies.org/BigKernelLock>
 
+
 ### See: <http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/>
 
 Provides an example including the addition of adding locks with the
 protecting access to a device. Their example locks on open() and
 unlocks on release().
+
 
 ### See the patch for the ioctl rework: <https://lwn.net/Articles/119656/>
 
@@ -26,11 +29,14 @@ The `ioctl` -> `unlocked_ioctl` signature change:
 
 The inode is obtained from `filp->f_dentry->d_inode` in the `unlocked_ioctl` procedure.
 
+
 ## Getting the current process UID, EUID, etc.
+
 
 ### The task struct was updated to use the cred struct in commit:
 
 See: <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=b6dff3ec5e116e3af6f537d4caedcad6b9e5082a>
+
 
 ### Getting the UID, EUID, etc.<a id="sec-1-2-2" name="sec-1-2-2"></a>
 
@@ -42,6 +48,7 @@ When you have the task struct, the following macros should be used (from commit 
     #define task<sub>gid</sub>(task)    ((task)->cred->gid)
     #define task<sub>euid</sub>(task)   ((task)->cred->euid)
     #define task<sub>egid</sub>(task)   ((task)->cred->egid)
+
 
 ### The UID, EUID, etc. are stored as kuid<sub>t</sub> types.
 
