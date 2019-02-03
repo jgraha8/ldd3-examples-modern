@@ -25,6 +25,7 @@
 #include <linux/types.h>  /* size_t */
 #include <linux/fcntl.h>
 #include <linux/cdev.h>
+#include <linux/sched.h>
 #include <linux/tty.h>
 #include <asm/atomic.h>
 #include <linux/list.h>
