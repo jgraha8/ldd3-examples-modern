@@ -3,11 +3,12 @@
 Notes for the port of the Linux Device Drivers 3rd Edition examples to the 4.x kernel series.
 
 
-## `struct file_operations` -> `ioctl` removed
+## Big Kernel Lock (BKL) removal
 
-When the Big Kernel Lock (BKL) was removed (fully removed in 2.6.39)
-ioctl went with it. One must use `unlocked_ioctl` when setting the
-file operations struct.
+When the BKL was removed (fully removed in 2.6.39) `ioctl` in `struct
+file_operations` went with it. One must set `unlocked_ioctl` when
+setting the file operations struct in place of `ioctl` as previously
+done.
 
 See: <https://kernelnewbies.org/BigKernelLock>
 
@@ -33,7 +34,7 @@ The inode is obtained from `filp->f_dentry->d_inode` in the `unlocked_ioctl` pro
 ## Getting the current process UID, EUID, etc.
 
 
-### The task struct was updated to use the cred struct in commit:
+### The task struct was updated to use the cred struct.
 
 See: [CRED: Separate task security context from task_struct](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=b6dff3ec5e116e3af6f537d4caedcad6b9e5082a)
 
