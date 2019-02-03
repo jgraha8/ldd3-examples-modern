@@ -44,12 +44,12 @@ See: <https://stackoverflow.com/questions/39229639/how-to-get-current-processs-u
 
 When you have the task struct, the following macros should be used (from commit b6dff3ec):
 
-    #define task<sub>uid</sub>(task)    ((task)->cred->uid)
-    #define task<sub>gid</sub>(task)    ((task)->cred->gid)
-    #define task<sub>euid</sub>(task)   ((task)->cred->euid)
-    #define task<sub>egid</sub>(task)   ((task)->cred->egid)
+    #define task_uid(task)    ((task)->cred->uid)
+    #define task_gid(task)    ((task)->cred->gid)
+    #define task_euid(task)   ((task)->cred->euid)
+    #define task_egid(task)   ((task)->cred->egid)
 
 
-### The UID, EUID, etc. are stored as kuid<sub>t</sub> types.
+### The UID, EUID, etc. are stored as kuid_t types.
 
 For comparing `kuid_t`, we use `uid_eq()`, and related macros from `<linux/uidgid.h>`.
