@@ -42,7 +42,7 @@ See: <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/
 
 See: <https://stackoverflow.com/questions/39229639/how-to-get-current-processs-uid-and-euid-in-linux-kernel-4-2>
 
-When you have the task struct, the following macros should be used (from commit b6dff3ec):
+When you have the task struct, the following macros should be used (from commit [b6dff3ec](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=b6dff3ec5e116e3af6f537d4caedcad6b9e5082a)):
 
     #define task_uid(task)    ((task)->cred->uid)
     #define task_gid(task)    ((task)->cred->gid)
