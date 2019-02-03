@@ -77,13 +77,13 @@ static int scull_s_release(struct inode *inode, struct file *filp)
  * The other operations for the single-open device come from the bare device
  */
 struct file_operations scull_sngl_fops = {
-	.owner =	THIS_MODULE,
-	.llseek =     	scull_llseek,
-	.read =       	scull_read,
-	.write =      	scull_write,
-	.ioctl =      	scull_ioctl,
-	.open =       	scull_s_open,
-	.release =    	scull_s_release,
+	.owner          = THIS_MODULE,
+	.llseek         = scull_llseek,
+	.read           = scull_read,
+	.write          = scull_write,
+	.unlocked_ioctl = scull_ioctl,
+	.open           = scull_s_open,
+	.release        = scull_s_release,
 };
 
 
@@ -139,13 +139,13 @@ static int scull_u_release(struct inode *inode, struct file *filp)
  * The other operations for the device come from the bare device
  */
 struct file_operations scull_user_fops = {
-	.owner =      THIS_MODULE,
-	.llseek =     scull_llseek,
-	.read =       scull_read,
-	.write =      scull_write,
-	.ioctl =      scull_ioctl,
-	.open =       scull_u_open,
-	.release =    scull_u_release,
+	.owner          = THIS_MODULE,
+	.llseek         = scull_llseek,
+	.read           = scull_read,
+	.write          = scull_write,
+	.unlocked_ioctl = scull_ioctl,
+	.open           = scull_u_open,
+	.release        = scull_u_release,
 };
 
 
@@ -212,13 +212,13 @@ static int scull_w_release(struct inode *inode, struct file *filp)
  * The other operations for the device come from the bare device
  */
 struct file_operations scull_wusr_fops = {
-	.owner =      THIS_MODULE,
-	.llseek =     scull_llseek,
-	.read =       scull_read,
-	.write =      scull_write,
-	.ioctl =      scull_ioctl,
-	.open =       scull_w_open,
-	.release =    scull_w_release,
+	.owner          = THIS_MODULE,
+	.llseek         = scull_llseek,
+	.read           = scull_read,
+	.write          = scull_write,
+	.unlocked_ioctl = scull_ioctl,
+	.open           = scull_w_open,
+	.release        = scull_w_release,
 };
 
 /************************************************************************
@@ -311,13 +311,13 @@ static int scull_c_release(struct inode *inode, struct file *filp)
  * The other operations for the device come from the bare device
  */
 struct file_operations scull_priv_fops = {
-	.owner =    THIS_MODULE,
-	.llseek =   scull_llseek,
-	.read =     scull_read,
-	.write =    scull_write,
-	.ioctl =    scull_ioctl,
-	.open =     scull_c_open,
-	.release =  scull_c_release,
+	.owner          = THIS_MODULE,
+	.llseek         = scull_llseek,
+	.read           = scull_read,
+	.write          = scull_write,
+	.unlocked_ioctl = scull_ioctl,
+	.open           = scull_c_open,
+	.release        = scull_c_release,
 };
 
 /************************************************************************

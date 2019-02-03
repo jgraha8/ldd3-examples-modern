@@ -312,15 +312,15 @@ static int scull_read_p_mem(char *buf, char **start, off_t offset, int count,
  * (some are overlayed with bare scull)
  */
 struct file_operations scull_pipe_fops = {
-	.owner =	THIS_MODULE,
-	.llseek =	no_llseek,
-	.read =		scull_p_read,
-	.write =	scull_p_write,
-	.poll =		scull_p_poll,
-	.ioctl =	scull_ioctl,
-	.open =		scull_p_open,
-	.release =	scull_p_release,
-	.fasync =	scull_p_fasync,
+	.owner          = THIS_MODULE,
+	.llseek         = no_llseek,
+	.read           = scull_p_read,
+	.write          = scull_p_write,
+	.poll           = scull_p_poll,
+	.unlocked_ioctl = scull_ioctl,
+	.open           = scull_p_open,
+	.release        = scull_p_release,
+	.fasync         = scull_p_fasync,
 };
 
 
