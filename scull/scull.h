@@ -20,7 +20,8 @@
 
 #include <linux/ioctl.h> /* needed for the _IOW etc stuff used later */
 
-#ifdef KMODE
+#ifndef SCULL_USERSPACE /* Include all definitions if not building userspace code */
+
 /*
  * Macros to help debugging
  */
@@ -132,8 +133,8 @@ loff_t  scull_llseek(struct file *filp, loff_t off, int whence);
 long    scull_ioctl(struct file *filp,
                     unsigned int cmd, unsigned long arg);
 
+#endif /* SCULL_USERSPACE */
 
-#endif /* KMODE */
 /*
  * Ioctl definitions
  */
