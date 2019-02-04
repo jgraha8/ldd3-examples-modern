@@ -368,7 +368,8 @@ int scull_p_init(dev_t firstdev)
 		scull_p_setup_cdev(scull_p_devices + i, i);
 	}
 #ifdef SCULL_DEBUG
-	create_proc_read_entry("scullpipe", 0, NULL, scull_read_p_mem, NULL);
+	// TODO: comment for now but need to convert to proc_create() (JSG)
+	// create_proc_read_entry("scullpipe", 0, NULL, scull_read_p_mem, NULL);
 #endif
 	return scull_p_nr_devs;
 }
@@ -382,7 +383,8 @@ void scull_p_cleanup(void)
 	int i;
 
 #ifdef SCULL_DEBUG
-	remove_proc_entry("scullpipe", NULL);
+	// TODO: resolve change from create_proc_read_entry() (JSG)
+	// remove_proc_entry("scullpipe", NULL);
 #endif
 
 	if (!scull_p_devices)

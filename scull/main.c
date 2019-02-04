@@ -81,10 +81,10 @@ int scull_trim(struct scull_dev *dev)
 	return 0;
 }
 #ifdef SCULL_DEBUG /* use proc only if debugging */
+
 /*
  * The proc filesystem: function to read and entry
  */
-
 int scull_read_procmem(char *buf, char **start, off_t offset,
                    int count, int *eof, void *data)
 {
@@ -206,28 +206,24 @@ static struct file_operations scull_proc_ops = {
 
 static void scull_create_proc(void)
 {
-	struct proc_dir_entry *entry;
-	create_proc_read_entry("scullmem", 0 /* default mode */,
-			NULL /* parent dir */, scull_read_procmem,
-			NULL /* client data */);
-	entry = create_proc_entry("scullseq", 0, NULL);
-	if (entry)
-		entry->proc_fops = &scull_proc_ops;
+	if (proc_create("scullmem", 0 /* default mode */, NULL /* parent dir */,
+			&scull_proc_ops /* file ops */) ) {
+		printk(KERN_NOTICE "created scullmem proc entry");
+	} else {
+		printk(KERN_ALERT "unable to create scullmem proc entry");
+	}
 }
 
 static void scull_remove_proc(void)
 {
 	/* no problem if it was not registered */
 	remove_proc_entry("scullmem", NULL /* parent dir */);
-	remove_proc_entry("scullseq", NULL);
+	
+	// remove_proc_entry("scullseq", NULL);
 }
 
 
 #endif /* SCULL_DEBUG */
-
-
-
-
 
 /*
  * Open and close
@@ -289,7 +285,7 @@ struct scull_qset *scull_follow(struct scull_dev *dev, int n)
 
 ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
                 loff_t *f_pos)
-{
+{	
 	struct scull_dev *dev = filp->private_data; 
 	struct scull_qset *dptr;	/* the first listitem */
 	int quantum = dev->quantum, qset = dev->qset;
@@ -299,8 +295,10 @@ ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
 
 	if (mutex_lock_interruptible(&dev->mutex))
 		return -ERESTARTSYS;
+
 	if (*f_pos >= dev->size)
 		goto out;
+
 	if (*f_pos + count > dev->size)
 		count = dev->size - *f_pos;
 
@@ -325,7 +323,6 @@ ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
 	}
 	*f_pos += count;
 	retval = count;
-
   out:
 	mutex_unlock(&dev->mutex);
 	return retval;

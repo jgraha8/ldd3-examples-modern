@@ -54,3 +54,11 @@ When you have the task struct, the following macros should be used (from commit 
 ### The UID, EUID, etc. are stored as kuid_t types.
 
 For comparing `kuid_t`, we use `uid_eq()`, and related macros from `<linux/uidgid.h>`.
+
+
+## Updated functions for the proc fs
+
+The `create_proc_read_entry()` function, for example, has been removed and replaced with `proc_create()` and `proc_create_data()`.
+
+See: [\[PATCH 00/26\] Eliminate create_proc_read_entry() \[RFC\]](https://lkml.org/lkml/2013/4/11/215)
+

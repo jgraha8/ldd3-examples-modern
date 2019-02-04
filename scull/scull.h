@@ -20,6 +20,7 @@
 
 #include <linux/ioctl.h> /* needed for the _IOW etc stuff used later */
 
+#ifdef KMODE
 /*
  * Macros to help debugging
  */
@@ -132,6 +133,7 @@ long    scull_ioctl(struct file *filp,
                     unsigned int cmd, unsigned long arg);
 
 
+#endif /* KMODE */
 /*
  * Ioctl definitions
  */
